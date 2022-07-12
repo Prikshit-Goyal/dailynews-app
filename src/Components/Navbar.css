@@ -1,0 +1,38 @@
+.nav1{
+    display: flex;
+    background-color: black;
+    color: white;
+    padding: 10px;
+  }
+  li{
+    list-style: none;
+    margin-right: 30px;
+    margin-left: 10px;
+    font-style: italic;
+  }
+  .li1{
+    color: aqua;
+    font-style: normal;
+    font-weight:bold;
+  }
+  .div1{
+    text-align: center;
+  }
+  li a{
+    text-decoration: none;
+    color: white;
+  }
+  
+  .search1{
+    float: right;
+    border-radius: 4px;
+    margin-left: auto;
+  }
+  #tag11{
+    font-size:large;
+    margin-right: 30px;
+    color:#00b4ff;
+    text-shadow: 2px 1px red;
+
+  }
+  

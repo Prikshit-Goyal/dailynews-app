@@ -1,6 +1,22 @@
 .App {
   text-align: center;
 }
+body{
+  background-color:rgb(51 50 50 / 57%);
+}
+h1{
+  color:black;
+  font-size: 50px;
+  font-style: italic;
+  margin-bottom: 70px;
+  margin-top: 80px;
+  text-shadow: 2px 1px red;
+
+}
+h2{
+  color:black;
+  text-shadow: 2px 1px wheat;
+}
 
 .App-logo {
   height: 40vmin;
@@ -35,4 +51,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+@media (max-width: 1000px) {
+   body{
+    width: 1000px;
+   }
+   .card{
+    margin-left: 80px;
+   }
 }
