@@ -4,6 +4,13 @@
   padding: 0 1rem 4rem;
 }
 
+@media (max-width: 900px) {
+  .news-page {
+    margin-top: 1rem;
+    padding-top: 0.25rem;
+  }
+}
+
 .news-page__heading {
   font-family: var(--font-display);
   font-weight: 700;

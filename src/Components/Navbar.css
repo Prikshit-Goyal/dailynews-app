@@ -9,9 +9,9 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0 1rem 0 1.25rem;
-  background: rgba(3, 3, 6, 0.85);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  /* No backdrop-filter here: it creates a containing block and clips
+     `position:fixed` drawer children to this 64px-tall bar. */
+  background: rgba(3, 3, 6, 0.94);
   border-bottom: 1px solid var(--border);
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.45);
 }
@@ -27,6 +27,7 @@
   text-shadow: 0 0 18px rgba(0, 245, 255, 0.55);
   white-space: nowrap;
   margin-right: 0.5rem;
+  flex-shrink: 0;
 }
 
 .site-nav__brand:hover {
@@ -73,6 +74,68 @@
   box-shadow: var(--glow-cyan);
 }
 
+.site-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.site-nav__menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--neon-cyan);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.site-nav__menu-btn:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 16px rgba(0, 245, 255, 0.2);
+}
+
+.site-nav__menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 20px;
+}
+
+.site-nav__menu-icon span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  border-radius: 1px;
+  background: currentColor;
+  transition:
+    transform 0.25s ease,
+    opacity 0.2s ease;
+}
+
+.site-nav--menu-open .site-nav__menu-icon span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.site-nav--menu-open .site-nav__menu-icon span:nth-child(2) {
+  opacity: 0;
+}
+
+.site-nav--menu-open .site-nav__menu-icon span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
 .site-nav__search {
   width: min(160px, 28vw);
   flex-shrink: 0;
@@ -98,26 +161,107 @@
   box-shadow: 0 0 0 3px rgba(0, 245, 255, 0.15);
 }
 
+.site-nav__backdrop {
+  display: none;
+}
+
 @media (max-width: 900px) {
-  .site-nav {
-    flex-wrap: wrap;
-    height: auto;
-    min-height: var(--nav-h);
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+  .site-nav__menu-btn {
+    display: flex;
+  }
+
+  .site-nav__brand {
+    margin-right: 0;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .site-nav__links {
-    order: 3;
-    width: 100%;
-    justify-content: flex-start;
-    padding-top: 0.35rem;
-    border-top: 1px solid var(--border);
-    margin-top: 0.25rem;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    width: min(300px, 88vw);
+    height: calc(100dvh - var(--nav-h));
+    max-height: calc(100vh - var(--nav-h));
+    flex: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    align-content: flex-start;
+    gap: 0.25rem;
+    padding: 1rem 1rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    margin: 0;
+    background: rgba(8, 8, 14, 0.98);
+    border-right: 1px solid var(--border-strong);
+    box-shadow:
+      8px 0 40px rgba(0, 0, 0, 0.55),
+      0 0 0 1px rgba(0, 245, 255, 0.08);
+    transform: translateX(-105%);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1042;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .site-nav--menu-open .site-nav__links {
+    transform: translateX(0);
+  }
+
+  .site-nav__links li {
+    margin: 0;
+  }
+
+  .site-nav__links a {
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .site-nav__backdrop {
+    display: block;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1041;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: rgba(0, 0, 0, 0.55);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.25s ease,
+      visibility 0.25s ease;
+  }
+
+  .site-nav--menu-open .site-nav__backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .site-nav__search {
+    width: min(140px, 32vw);
+  }
+
+  .site-nav__actions {
     margin-left: auto;
-    width: min(200px, 45vw);
+  }
+}
+
+@media (min-width: 901px) {
+  .site-nav__actions {
+    margin-left: 0;
+  }
+
+  .site-nav__search {
+    width: min(160px, 28vw);
   }
 }
