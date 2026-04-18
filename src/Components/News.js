@@ -14,9 +14,11 @@ const News = (props) => {
 
     const updateNews = async (page1) => {
         props.setProgress(10);  // loading bar setting progress 0
-        // const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=16723a221be243f3a7d83f1ab4a01fec
+        const apiKey = (process.env.REACT_APP_API_KEY ?? "")
+            .trim()
+            .replace(/^["']|["']$/g, "")
+        // const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${apiKey}
         //            &page=${page1}&pageSize=${props.pageSize}`
-        const apiKey = "pub_97aa8e35b28d4d14aef7f7bbdd902503" //"pub_17b59e26d76e45fbad9a6908dd7cf181"
         const url = `https://newsdata.io/api/1/latest?apikey=${apiKey}&country=${props.country}&language=en&category=${props.category}&image=1&size=${props.pageSize}`
         setLoading(true);
         let data = await fetch(url);
