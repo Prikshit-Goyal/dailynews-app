@@ -39,11 +39,13 @@ function Navbar(props){
 
             <ul className="site-nav__links" id="site-nav-drawer">
                 <li><NavLink className={navLinkClass} to="/dailynews-app" end onClick={closeMenu}>Home</NavLink></li>
+                <li><NavLink className={navLinkClass} to="/breaking" onClick={closeMenu}>Breaking</NavLink></li>
                 <li><NavLink className={navLinkClass} to="/business" onClick={closeMenu}>Business</NavLink></li>
                 <li><NavLink className={navLinkClass} to="/entertainment" onClick={closeMenu}>Entertainment</NavLink></li>
-                <li><NavLink className={navLinkClass} to="/health" onClick={closeMenu}>Health</NavLink></li>
-                <li><NavLink className={navLinkClass} to="/science" onClick={closeMenu}>Science</NavLink></li>
-                <li><NavLink className={navLinkClass} to="/sports" onClick={closeMenu}>Sports</NavLink></li>
+                <li><NavLink className={navLinkClass} to="/world" onClick={closeMenu}>World</NavLink></li>
+                {/* <li><NavLink className={navLinkClass} to="/health" onClick={closeMenu}>Health</NavLink></li> */}
+                {/* <li><NavLink className={navLinkClass} to="/science" onClick={closeMenu}>Science</NavLink></li> */}
+                {/* <li><NavLink className={navLinkClass} to="/sports" onClick={closeMenu}>Sports</NavLink></li> */}
                 <li><NavLink className={navLinkClass} to="/technology" onClick={closeMenu}>Technology</NavLink></li>
             </ul>
 

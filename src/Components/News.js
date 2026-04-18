@@ -14,15 +14,17 @@ const News = (props) => {
 
     const updateNews = async (page1) => {
         props.setProgress(10);  // loading bar setting progress 0
-        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=16723a221be243f3a7d83f1ab4a01fec
-                   &page=${page1}&pageSize=${props.pageSize}`
+        // const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=16723a221be243f3a7d83f1ab4a01fec
+        //            &page=${page1}&pageSize=${props.pageSize}`
+        const apiKey = "pub_97aa8e35b28d4d14aef7f7bbdd902503" //"pub_17b59e26d76e45fbad9a6908dd7cf181"
+        const url = `https://newsdata.io/api/1/latest?apikey=${apiKey}&country=${props.country}&language=en&category=${props.category}&image=1&size=${props.pageSize}`
         setLoading(true);
         let data = await fetch(url);
         props.setProgress(30);  
         let parsedData = await data.json()
         props.setProgress(80);
-        // console.log(parsedData)
-        setArticles(parsedData.articles);
+        // console.log("DATA ::: ",parsedData)
+        setArticles(parsedData.results);
         setTotalResults(parsedData.totalResults)
         setLoading(false)
         props.setProgress(100);  // loading bar setting progress 100
@@ -54,7 +56,7 @@ const News = (props) => {
             {articles.map((element) =>{
                 return <div className="col-12 col-md-6 col-xl-4" key={element.url}>
                     <NewsItem  title={element.title?element.title.slice(0,45):""} description={element.description?element.description.slice(0,100):""}
-                    imageurl={element.urlToImage} newsurl={element.url} date={element.publishedAt} author={element.author} source={element.source?.name ?? "News"}/>
+                    imageurl={element.image_url} newsurl={element.link} date={element.pubDate} author={element.creator} source={element.source_name ?? "News"}/>
                 </div>
                 })}
             </div>
