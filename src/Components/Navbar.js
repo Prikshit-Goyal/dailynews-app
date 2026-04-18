@@ -64,7 +64,10 @@ function Navbar(props){
                         <span />
                     </span>
                 </button>
-                <input className="site-nav__search" type="search" placeholder="Search…" aria-label="Search" readOnly />
+                <span className="site-nav__credit">
+                    <span className="site-nav__credit-prefix">Created by </span>
+                    <span className="site-nav__credit-name">Prikshit Goyal</span>
+                </span>
             </div>
 
             <button
