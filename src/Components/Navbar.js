@@ -1,40 +1,43 @@
 import React from "react"
 import PropTypes from 'prop-types'
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 
-
-// let a = "React";
-
 function Navbar(props){
+    const titleParts = props.heading.split(" — ");
+
     return(
         <>
-            <nav className="nav1 fixed-top">
-            <b id="tag11">Digital News</b>
-            <li className="li1"><Link to="/">Home</Link></li>
-            <li><Link to="/business">Business</Link></li>
-            <li><Link to="/entertainment">Entertainment</Link></li>
-            <li><Link to="/health">Health</Link></li>
-            <li><Link to="/science">Science</Link></li>
-            <li><Link to="/sports">Sports</Link></li>
-            <li><Link to="/technology">Technology</Link></li>
-            {/* <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li> */}
-            <input className="search1" placeholder="Search Here"></input>
+            <nav className="site-nav" aria-label="Main">
+            <NavLink className="site-nav__brand" to="/dailynews-app" end>Digital News</NavLink>
+            <ul className="site-nav__links">
+            <li><NavLink className={({ isActive }) => isActive ? "nav-link--active" : undefined} to="/dailynews-app" end>Home</NavLink></li>
+            <li><NavLink className={({ isActive }) => isActive ? "nav-link--active" : undefined} to="/business">Business</NavLink></li>
+            <li><NavLink className={({ isActive }) => isActive ? "nav-link--active" : undefined} to="/entertainment">Entertainment</NavLink></li>
+            <li><NavLink className={({ isActive }) => isActive ? "nav-link--active" : undefined} to="/health">Health</NavLink></li>
+            <li><NavLink className={({ isActive }) => isActive ? "nav-link--active" : undefined} to="/science">Science</NavLink></li>
+            <li><NavLink className={({ isActive }) => isActive ? "nav-link--active" : undefined} to="/sports">Sports</NavLink></li>
+            <li><NavLink className={({ isActive }) => isActive ? "nav-link--active" : undefined} to="/technology">Technology</NavLink></li>
+            </ul>
+            <input className="site-nav__search" type="search" placeholder="Search…" aria-label="Search" readOnly />
             </nav>
-            <div className="div1">
-            <h1>{props.heading}</h1>
-            </div>
+            <header className="page-hero">
+            <h1 className="page-hero__title">
+                {titleParts[0]}
+                {titleParts[1] ? <span> — {titleParts[1]}</span> : null}
+            </h1>
+            <div className="page-hero__line" aria-hidden="true" />
+            </header>
         </>
     )
 }
 
 export default Navbar;
 
-Navbar.prototype = {           // props types 
+Navbar.propTypes = {
     heading: PropTypes.string
 }
 
-Navbar.defaultProps = {           // it will use this value if we do nat pass the value 
+Navbar.defaultProps = {
     heading: "HELLO"
 }

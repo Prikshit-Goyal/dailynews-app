@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react'
 import NewsItem from './NewsItem'
 import Spinner from './Spinner'
 import PropTypes from 'prop-types'
+import './News.css'
 // import Newspaper from './SampleOutput'
 
 const News = (props) => {
@@ -46,23 +47,22 @@ const News = (props) => {
 
     return (
         <>
-        <div className="container my-3">        
-        <h2>- {props.heading2}</h2>       
-            <div className="row">
+        <div className="news-page">
+            {loading && <Spinner/>}
+            <h2 className="news-page__heading">{props.heading2}</h2>
+            <div className="row g-4">
             {articles.map((element) =>{
-                return <div className="col mx-3 my-4" key={element.url}>
-                    <NewsItem  title={element.title?element.title.slice(0,45):""} description={element.description?element.description.slice(0,100):""} 
-                    imageurl={element.urlToImage} newsurl={element.url} date={element.publishedAt} author={element.author} source={element.source.name}/>
+                return <div className="col-12 col-md-6 col-xl-4" key={element.url}>
+                    <NewsItem  title={element.title?element.title.slice(0,45):""} description={element.description?element.description.slice(0,100):""}
+                    imageurl={element.urlToImage} newsurl={element.url} date={element.publishedAt} author={element.author} source={element.source?.name ?? "News"}/>
                 </div>
                 })}
             </div>
-            {loading && <Spinner/>}
-            <div className="container d-flex justify-content-between">
-                <button disabled={page<=1} type='button' className='btn btn-dark mx-3 my-5' 
-                onClick={prevClick} style={{width:"120px"}}>&larr; Previous</button>
-                <button disabled={page+1 > Math.ceil(totalResults/props.pageSize)} type='button' 
-                className='btn btn-dark mx-3 my-5' onClick={nextClick} style={{width:"120px"}}>Next &rarr;</button>
-                {/* we can also use infinite scrollbar instead of next previous buttons  */}
+            <div className="news-pagination">
+                <button disabled={page<=1} type="button" className="news-btn"
+                onClick={prevClick}>&larr; Previous</button>
+                <button disabled={page+1 > Math.ceil(totalResults/props.pageSize)} type="button"
+                className="news-btn" onClick={nextClick}>Next &rarr;</button>
             </div>
         </div>
       </>

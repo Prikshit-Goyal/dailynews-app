@@ -1,13 +1,57 @@
+:root {
+  --bg-deep: #030306;
+  --bg: #06060a;
+  --bg-elevated: #0e0e14;
+  --bg-card: #12121a;
+  --border: rgba(0, 245, 255, 0.12);
+  --border-strong: rgba(0, 245, 255, 0.35);
+  --neon-cyan: #00f5ff;
+  --neon-magenta: #ff2bd6;
+  --neon-lime: #c8ff3d;
+  --text: #ececf1;
+  --text-muted: #8a8a9a;
+  --glow-cyan: 0 0 20px rgba(0, 245, 255, 0.45);
+  --glow-magenta: 0 0 24px rgba(255, 43, 214, 0.35);
+  --font-display: "Syne", system-ui, sans-serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --nav-h: 64px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% -30%, rgba(0, 245, 255, 0.12), transparent 55%),
+    radial-gradient(ellipse 80% 50% at 100% 50%, rgba(255, 43, 214, 0.06), transparent 45%),
+    radial-gradient(ellipse 60% 40% at 0% 80%, rgba(200, 255, 61, 0.05), transparent 40%);
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  min-height: 100vh;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+::selection {
+  background: rgba(0, 245, 255, 0.25);
+  color: #fff;
 }

@@ -2,7 +2,7 @@ import './App.css';
 import React,{useState} from 'react'
 import Navbar from './Components/Navbar';
 import News from './Components/News';
-import {BrowserRouter,Routes,Route} from "react-router-dom";
+import {BrowserRouter,Routes,Route,Navigate} from "react-router-dom";
 import LoadingBar from 'react-top-loading-bar'
 
 function App(){
@@ -11,13 +11,16 @@ function App(){
     return (
       <>
       <BrowserRouter>
-        <Navbar heading="Digital News - Top Headlines"/>
+        <Navbar heading="Digital News — Top Headlines"/>
         <LoadingBar
-          color='#f11946'
+          color="#00f5ff"
+          height={3}
           progress={progress}
           onLoaderFinished={() => setProgress(0)}
         />
+        <div className="app-shell">
         <Routes>
+          <Route path="/" element={<Navigate to="/dailynews-app" replace />} />
           <Route exact path="/dailynews-app" element={<News setProgress={setProgress} key="general" pageSize={12} country="in" category="general" heading2="News"/>}/>
           <Route exact path="/business" element={<News setProgress={setProgress} key="business" pageSize={12} country="us" category="business" heading2="Business News"/>}/>
           <Route exact path="/entertainment" element={<News setProgress={setProgress} key="entertainment" pageSize={12} country="in" category="entertainment" heading2="Entertainment News"/>}/>
@@ -27,6 +30,7 @@ function App(){
           <Route exact path="/technology" element={<News setProgress={setProgress} key="technology" pageSize={12} country="in" category="technology" heading2="Technology News"/>}/>
         
         </Routes>
+        </div>
       </BrowserRouter>
       </>
     )
