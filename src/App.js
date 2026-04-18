@@ -15,6 +15,7 @@ function App(){
         <LoadingBar
           color='#f11946'
           progress={progress}
+          onLoaderFinished={() => setProgress(0)}
         />
         <Routes>
           <Route exact path="/dailynews-app" element={<News setProgress={setProgress} key="general" pageSize={12} country="in" category="general" heading2="News"/>}/>
